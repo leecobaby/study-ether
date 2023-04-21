@@ -7,7 +7,6 @@ import { ethers } from 'ethers'
 
 // 利用Alchemy的rpc节点连接以太坊网络
 // 准备 alchemy API 可以参考https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md
-// const ALCHEMY_MAINNET_URL = 'https://mainnet.infura.io/v3/8a7b226da3fc4dd3bfb20c10c1179994'
 const ALCHEMY_MAINNET_URL = 'https://eth-mainnet.g.alchemy.com/v2/oKmOQKbneVkxgHZfibs-iFhIlIAl6HDN'
 const ALCHEMY_GOERLI_URL = 'https://eth-goerli.alchemyapi.io/v2/GlaeWuylnNM3uuOo-SAwJxuwTdqHaY5l'
 // 连接以太坊主网
