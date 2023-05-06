@@ -60,11 +60,18 @@ const main = async () => {
   if (ethers.utils.formatEther(balanceETH) > 0.002) {
     // 4. 利用contractFactory部署NFT合约
     console.log('\n2. 利用contractFactory部署NFT合约')
+    const gasPrice = await provider.getGasPrice()
+    console.log('Base Gas Price:', ethers.utils.formatUnits(gasPrice, 'gwei') + 'Gwei')
+
     // 部署合约，填入constructor的参数
-    const contractNFT = await factoryNFT.deploy('WTF Signature', 'WTF', wallet.address)
+    const contractNFT = await factoryNFT.deploy('WTF Signature', 'WTF', wallet.address, {
+      // ethers 库好像内部自带 gas 预估，而这个 gas 预估有些问题，计算的不精准，经常会预估出很大的 gas 费用，而钱包余额小于这个 gas * price + value 它就会报错，脚本停止，所以这里指定固定的额度，来避开这个错误，当然这需要自己指定个不会报错大概 gas
+      gasLimit: ethers.utils.parseUnits('1', 'gwei'),
+      gasPrice: gasPrice
+    })
     console.log(`合约地址: ${contractNFT.address}`)
     console.log('部署合约的交易详情')
-    console.log(contractNFT.deployTransaction)
+    // console.log(contractNFT.deployTransaction)
     console.log('等待合约部署上链')
     await contractNFT.deployed()
     // 也可以用 contractNFT.deployTransaction.wait()
