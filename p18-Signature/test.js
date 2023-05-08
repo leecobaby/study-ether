@@ -5,7 +5,7 @@ const provider = new ethers.providers.JsonRpcProvider(ALCHEMY_ARB_URL)
 const gasPrice = await provider.getGasPrice()
 console.log('Base Gas Price:', gasPrice.toString())
 
-// 估算消耗的 gas ，在 arb 上好像算的不准
+// 估算消耗的 gas ，在 arb 上好像算的不准，可能是 arb 的打包票据的机制导致的
 const estimatedGasLimit = await provider.estimateGas(
   factoryNFT.getDeployTransaction('WTF Signature', 'WTF', wallet.address).data
 )
